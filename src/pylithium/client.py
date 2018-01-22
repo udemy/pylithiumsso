@@ -9,8 +9,13 @@ from Crypto.Cipher import AES
 
 _CRYPTO_BAD_CHARS = "+/="
 _CRYPTO_GOOD_CHARS = "-_."
-ENCRYPT_REPLACE = string.maketrans(_CRYPTO_BAD_CHARS, _CRYPTO_GOOD_CHARS)
-DECRYPT_REPLACE = string.maketrans(_CRYPTO_GOOD_CHARS, _CRYPTO_BAD_CHARS)
+if hasattr(str, maketrans):
+    ENCRYPT_REPLACE = str.maketrans(_CRYPTO_BAD_CHARS, _CRYPTO_GOOD_CHARS)
+    DECRYPT_REPLACE = str.maketrans(_CRYPTO_GOOD_CHARS, _CRYPTO_BAD_CHARS)
+else:
+    # python 2.x compatability
+    ENCRYPT_REPLACE = string.maketrans(_CRYPTO_BAD_CHARS, _CRYPTO_GOOD_CHARS)
+    DECRYPT_REPLACE = string.maketrans(_CRYPTO_GOOD_CHARS, _CRYPTO_BAD_CHARS)
 CRYPTO_BLOCK_SIZE = 16
 CRYPTO_PADDING = '\0'
 DIGITS = "0123456789"
