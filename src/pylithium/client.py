@@ -14,6 +14,7 @@ if hasattr(str, 'maketrans'):
     DECRYPT_REPLACE = str.maketrans(_CRYPTO_GOOD_CHARS, _CRYPTO_BAD_CHARS)
 else:
     # python 2.x compatability
+    xrange = range
     ENCRYPT_REPLACE = string.maketrans(_CRYPTO_BAD_CHARS, _CRYPTO_GOOD_CHARS)
     DECRYPT_REPLACE = string.maketrans(_CRYPTO_GOOD_CHARS, _CRYPTO_BAD_CHARS)
 CRYPTO_BLOCK_SIZE = 16
